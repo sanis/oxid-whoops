@@ -1,13 +1,11 @@
 <?php
 
-
 class whoops_oxshopcontrol extends whoops_oxshopcontrol_parent
 {
     /**
      * @var Whoops\Run Whoops run object
      */
     protected $_run = null;
-
 
     /**
      * render oxView object
@@ -48,7 +46,7 @@ class whoops_oxshopcontrol extends whoops_oxshopcontrol_parent
      * Sets default exception handler.
      * Ideally all exceptions should be handled with try catch and default exception should never be reached.
      *
-     * @return null;
+     * @return null
      */
     protected function _setDefaultExceptionHandler()
     {
