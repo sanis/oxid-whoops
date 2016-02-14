@@ -3,9 +3,25 @@
 class whoops_oxshopcontrol extends whoops_oxshopcontrol_parent
 {
     /**
-     * @var Whoops\Run Whoops run object
+     * @var whoops_oxexceptionhandler Whoops run object
      */
-    protected $_run = null;
+    protected $whoops;
+
+    /**
+     * Sets default exception handler.
+     * Ideally all exceptions should be handled with try catch and default exception should never be reached.
+     *
+     * @return null;
+     */
+    protected function _setDefaultExceptionHandler()
+    {
+        if (isset($this->_blHandlerSet)) {
+            return;
+        }
+
+        $this->whoops = oxNew('oxexceptionhandler', $this->_isDebugMode());
+        set_exception_handler([$this->whoops, 'handleUncaughtException']);
+    }
 
     /**
      * render oxView object
@@ -17,49 +33,16 @@ class whoops_oxshopcontrol extends whoops_oxshopcontrol_parent
     protected function _render($oViewObject)
     {
         $sTemplateName = $oViewObject->render();
-        // check if template dir exists, if not let Whoops! display this error, too!
         $sTemplateFile = $this->getConfig()->getTemplatePath($sTemplateName, $this->isAdmin());
-        if ($this->_showExtendedExceptionInfo() && !file_exists($sTemplateFile)) {
+        if ($this->whoops->showExtendedExceptionInfo() && !file_exists($sTemplateFile)) {
 
             $oEx = oxNew('oxSystemComponentException');
             $oEx->setMessage('EXCEPTION_SYSTEMCOMPONENT_TEMPLATENOTFOUND' . " Template: " . $sTemplateName);
             $oEx->setComponent($sTemplateName);
-            // let whoops do the fancy stuff :)
-            $this->_run->handleException($oEx);
+            $this->whoops->handleException($oEx);
         }
 
         return parent::_render($oViewObject);
-    }
-
-    /**
-     * Determine if we should display extended exception info, e.g. when in debug or non-productive
-     * shop mode or in admin area / backend of the shop.
-     *
-     * @return boolean
-     */
-    protected function _showExtendedExceptionInfo()
-    {
-        return (($this->isAdmin() && $this->getUser()) || !oxRegistry::getConfig()->isProductiveMode() || $this->_isDebugMode());
-    }
-
-    /**
-     * Sets default exception handler.
-     * Ideally all exceptions should be handled with try catch and default exception should never be reached.
-     *
-     * @return null
-     */
-    protected function _setDefaultExceptionHandler()
-    {
-        if (isset($this->_blHandlerSet)) {
-            return;
-        }
-        if ($this->_showExtendedExceptionInfo()) {
-            $this->_run = new Whoops\Run();
-            $this->_run->pushHandler(new Whoops\Handler\PrettyPageHandler());
-            $this->_run->register();
-        } else {
-            parent::_setDefaultExceptionHandler();
-        }
     }
 
     /**
@@ -69,8 +52,8 @@ class whoops_oxshopcontrol extends whoops_oxshopcontrol_parent
      */
     protected function _handleDbConnectionException($oEx)
     {
-        if ($this->_showExtendedExceptionInfo()) {
-            $this->_run->handleException($oEx);
+        if ($this->whoops->showExtendedExceptionInfo()) {
+            $this->whoops->handleException($oEx);
         } else {
             parent::_handleDbConnectionException($oEx);
         }
@@ -84,8 +67,8 @@ class whoops_oxshopcontrol extends whoops_oxshopcontrol_parent
      */
     protected function _handleSystemException($oEx)
     {
-        if ($this->_showExtendedExceptionInfo()) {
-            $this->_run->handleException($oEx);
+        if ($this->whoops->showExtendedExceptionInfo()) {
+            $this->whoops->handleException($oEx);
         } else {
             parent::_handleSystemException($oEx);
         }
@@ -98,22 +81,22 @@ class whoops_oxshopcontrol extends whoops_oxshopcontrol_parent
      */
     protected function _handleCookieException($oEx)
     {
-        if ($this->_showExtendedExceptionInfo()) {
-            $this->_run->handleException($oEx);
+        if ($this->whoops->showExtendedExceptionInfo()) {
+            $this->whoops->handleException($oEx);
         } else {
             parent::_handleCookieException($oEx);
         }
     }
 
     /**
-     * Catching other not cought exceptions.
+     * Catching other not caught exceptions.
      *
      * @param oxException $oEx
      */
     protected function _handleBaseException($oEx)
     {
-        if ($this->_showExtendedExceptionInfo()) {
-            $this->_run->handleException($oEx);
+        if ($this->whoops->showExtendedExceptionInfo()) {
+            $this->whoops->handleException($oEx);
         } else {
             parent::_handleBaseException($oEx);
         }
