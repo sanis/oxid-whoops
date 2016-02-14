@@ -19,12 +19,12 @@ $aModule = [
     'email'       => 'justinas.bolys@gmail.com',
     'author'      => 'Justinas Bolys',
     'url'         => 'https://github.com/sanis/oxid-whoops/',
-    'files'       => [],
+    'files'       => [ ],
     'extend'      => [
         'oxshopcontrol' => 'sanis/whoops/extends/whoops_oxshopcontrol',
     ],
-    'templates'   => [],
-    'blocks'      => [],
-    'settings'    => [],
-    'events'      => [],
+    'templates'   => [ ],
+    'blocks'      => [ ],
+    'settings'    => [ ],
+    'events'      => [ ],
 ];
