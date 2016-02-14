@@ -1,4 +1,5 @@
 # oxid-whoops
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sanis/oxid-whoops/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sanis/oxid-whoops/?branch=master)
 
 Integration of the [whoops](https://github.com/filp/whoops/) error handler base/framework for PHP into the [OXID](http://www.oxid-esales.com) eShop.
 
