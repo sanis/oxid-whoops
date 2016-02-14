@@ -23,7 +23,8 @@ Productive mode should be disabled to see error messages. Enable productive mode
 
 ## Authors
 
-This whoops library was primarily developed by [Filipe Dobreira](https://github.com/filp), and is was originaly created by [Denis Sokolov](https://github.com/denis-sokolov). A lot of awesome fixes and enhancements were also sent in by [various contributors](https://github.com/filp/whoops/contributors).
+This whoops library was primarily developed by [Filipe Dobreira](https://github.com/filp), and was originaly created by [Denis Sokolov](https://github.com/denis-sokolov). A lot of awesome fixes and enhancements were also sent in by [various contributors](https://github.com/filp/whoops/contributors).
+
 The smx_whoops module for integrating whoops into OXID was developed by shoptimax GmbH, Gernot Payer and [Stefan Moises](https://github.com/smxsm). 
 
 This is modified version of the module with some improvements made by [Justinas Bolys](https://github.com/sanis).
