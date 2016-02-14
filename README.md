@@ -8,6 +8,18 @@ Integration of the [whoops](https://github.com/filp/whoops/) error handler base/
 error interface that helps you debug your web projects, but at heart it's a simple yet
 powerful stacked error handling system.
 
+![Whoops!](http://i.imgur.com/0VQpe96.png)
+
+## Installation
+
+1. To your OXID composer.json (usualy in modules folder) add ```"filp/whoops": "^2.0"``` Or just run ```composer require filp/whoops``` to get it added automatically.
+2. If you have added step 1 line to composer.json file by yourself run ```composer update``` from console to get dependencies updated.
+3. Copy modules folder contents to your OXID installation modules folder.
+4. Enable module via OXID admin.
+5. Enjoy very nice exceptions!
+
+Productive mode should be disabled to see error messages. Enable productive mode only on your production environment. Then you'll get shop offline message on exceptions without revealing code parts to the users.
+
 ## Authors
 
 This whoops library was primarily developed by [Filipe Dobreira](https://github.com/filp), and is was originaly created by [Denis Sokolov](https://github.com/denis-sokolov). A lot of awesome fixes and enhancements were also sent in by [various contributors](https://github.com/filp/whoops/contributors).
